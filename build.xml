@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="war" name="jenkins-labs">
+
+
+    <property environment="env"/>
+
+    <path id="project.class.path">
+        <pathelement location="lib/commons-codec-1.5.jar"/>
+        <pathelement location="lib/commons-beanutils-1.8.0.jar"/>
+        <pathelement location="lib/commons-collections-3.2.1.jar"/>
+        <pathelement location="lib/commons-email-1.2.jar"/>
+        <pathelement location="lib/commons-io-1.1.jar"/>
+        <pathelement location="lib/commons-lang-2.3.jar"/>
+        <pathelement location="lib/jakarta-oro.jar"/>
+        <pathelement location="lib/log4j-1.2.13.jar"/>
+        <pathelement location="lib/poi-2.5.1-final-20040804.jar"/>
+        <pathelement location="lib/struts-el.jar"/>
+        <pathelement location="lib/struts-legacy.jar"/>
+        <pathelement location="lib/struts.jar"/>
+        <pathelement location="lib/json-lib-2.3-jdk13.jar"/>
+        <pathelement location="lib/ezmorph-1.0.6.jar"/>
+
+        <pathelement location="lib/ext/ibatis-labs.jar"/>
+
+        <pathelement location="lib/ext/hsqldb.jar"/>
+        <pathelement location="lib/ext/ibatis-common-2.jar"/>
+        <pathelement location="lib/ext/ibatis-dao-2.jar"/>
+        <pathelement location="lib/ext/ibatis-sqlmap-2.jar"/>
+        <pathelement location="lib/ext/jtds-1.2.5.jar"/>
+        <pathelement location="lib/ext/msbase.jar"/>
+        <pathelement location="lib/ext/mssqlserver.jar"/>
+        <pathelement location="lib/ext/msutil.jar"/>
+
+        <pathelement location="${env.JBOSS_HOME}/client/jbossall-client.jar"/>
+        <pathelement location="${env.JBOSS_HOME}/client/javax.servlet.jar"/>
+    </path>
+
+    <target name="init">
+        <mkdir dir="build"/>
+        <delete failonerror="false" includeemptydirs="true" file="build/jenkins-labs.war"/>
+    </target>
+
+    <target name="javac" depends="init">
+        <mkdir dir="build/WEB-INF/classes"/>
+
+        <echo message="Compilando..."/>
+
+        <javac srcdir="src" destdir="build/WEB-INF/classes" classpathref="project.class.path" debug="yes">
+            <classpath path="build/WEB-INF/classes"/>
+        </javac>
+
+        <echo message="Preparando WAR"/>
+
+        <copy todir="build/WEB-INF/classes">
+            <fileset dir="src" includes="**/*.properties"/>
+            <fileset dir="src" includes="**/*.xml"/>
+            <fileset dir="src" includes="**/*.vm"/>
+        </copy>
+        <copy todir="build/">
+            <fileset dir="web" includes="**/*.*"/>
+        </copy>
+        <copy todir="build/WEB-INF">
+            <fileset dir="web/WEB-INF" includes="**/*.*"/>
+        </copy>
+        <copy todir="build/WEB-INF/lib">
+            <fileset dir="lib" includes="**/*.jar">
+                <exclude name="lib/log4j-1.2.13.jar"/>
+                <exclude name="lib/hsqldb.jar"/>
+            </fileset>
+            <fileset dir="lib/ext" includes="**/*.jar"/>
+        </copy>
+    </target>
+
+    <target name="war" depends="javac">
+        <echo message="Generando WAR"/>
+
+        <war compress="false" destfile="build/jenkins-labs.war" webxml="build/WEB-INF/web.xml" basedir="build"
+             excludes="WEB-INF/web.xml"/>
+    </target>
+
+    <target name="dist" depends="war">
+        <mkdir dir="dist"/>
+
+        <copy todir="dist" file="build/jenkins-labs.war"/>
+    </target>
+
+    <target name="clean">
+        <delete failonerror="false" includeemptydirs="true">
+            <fileset dir="build/"/>
+        </delete>
+        <delete dir="docker/artefacts"/>
+    </target>
+
+    <target name="deploy" depends="war">
+        <!--<copy todir="${env.JBOSS_HOME}/server/default/deploy" file="build/jenkins-labs.war" />-->
+        <copy todir="${env.TOMCAT_HOME}/webapps" file="build/jenkins-labs.war"/>
+    </target>
+
+    <target name="redeploy" depends="undeploy, deploy"/>
+
+    <target name="undeploy">
+        <!--<delete failonerror="false" includeemptydirs="true" file="${env.JBOSS_HOME}/server/default/deploy/jenkins-labs.war" />-->
+        <delete failonerror="false" includeemptydirs="true" file="${env.TOMCAT_HOME}/webapps/jenkins-labs.war"/>
+    </target>
+
+    <target name="javadoc" description="Crea Javadoc API">
+        <mkdir dir="build/javadoc"/>
+        <javadoc sourcepath="src" destdir="build/javadoc" packagenames="*" classpathref="project.class.path"/>
+    </target>
+
+    <target name="docker" depends="clean,war">
+        <copy todir="docker/artefacts" file="build/jenkins-labs.war"/>
+    </target>
+
+</project>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+        "http://struts.apache.org/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+    <form-beans>
+        <form-bean name="singinForm" type="cl.bennu.jenkinslabs.web.form.SinginForm"/>
+        <form-bean name="paymentForm" type="cl.bennu.jenkinslabs.web.form.PaymentForm"/>
+    </form-beans>
+
+
+    <action-mappings>
+        <action path="/singin"
+                name="singinForm"
+                type="cl.bennu.jenkinslabs.web.action.SinginAction"
+                parameter="method" >
+            <forward name="startSingnin" path="/jsp/singin.jsp"/>
+            <forward name="success" path="/jsp/payment.jsp"/>
+            <forward name="fail" path="/jsp/singin.jsp"/>
+        </action>
+        <action path="/payment"
+                name="paymentForm"
+                type="cl.bennu.jenkinslabs.web.action.PaymentAction"
+                parameter="method" >
+            <forward name="startPayment" path="/jsp/payment.jsp"/>
+            <forward name="paymentList" path="/jsp/jspf/paymentList.jsp"/>
+        </action>
+    </action-mappings>
+
+    <message-resources parameter="cl.bennu.strutslabs.web.MessageResources"/>
+
+</struts-config>
