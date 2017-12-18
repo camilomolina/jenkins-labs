@@ -1,6 +1,9 @@
 #!groovy
 
 node {
+    stage('Checkout') {
+        echo 'Checkout'
+    }
     stage('Build') {
         echo 'Building'
     }
@@ -11,3 +14,7 @@ node {
         echo 'deployment'
     }
 }
+
+/*
+
+
