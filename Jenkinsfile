@@ -1,5 +1,7 @@
 #!groovy
 
+
+
 node {
     stage('Environment') {
         echo 'Environment'
