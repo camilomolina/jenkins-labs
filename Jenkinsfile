@@ -4,9 +4,6 @@ node {
     stage('Environment') {
         echo 'Environment'
     }
-    stage('Checkout') {
-        echo 'Checkout'
-    }
     stage('Build') {
         echo 'Building'
     }
