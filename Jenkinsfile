@@ -1,6 +1,9 @@
 #!groovy
 
 node {
+    stage('Environment') {
+        echo 'Environment'
+    }
     stage('Checkout') {
         echo 'Checkout'
     }
@@ -15,6 +18,6 @@ node {
     }
 }
 
-/*
+
 
 
