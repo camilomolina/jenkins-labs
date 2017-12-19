@@ -7,6 +7,11 @@ node {
 
     stage('Environment') {
         echo 'Environment'
+
+        def username = 'Jenkins'
+        echo 'Hello Mr. ${username}'
+        echo "I said, Hello Mr. ${username}"
+        
         antHome = '/usr/local/lib/apache-ant-1.8.4'
         echo ${antHome}
         echo '${antHome}'
