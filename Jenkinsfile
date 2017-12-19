@@ -9,7 +9,7 @@ node {
         echo 'Environment'
         //git url: 'https://github.com/camilomolina/jenkins-labs.git', branch: 'develop'
         checkout scm
-        antHome = tool '/usr/local/lib/apache-ant-1.8.4'
+        antHome = '/usr/local/lib/apache-ant-1.8.4'
     }
     stage('Build') {
         echo 'Building'
