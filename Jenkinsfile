@@ -8,21 +8,17 @@ node {
     stage('Environment') {
         echo 'Environment'
 
-        def username = 'Jenkins'
-        echo 'Hello Mr. ${username}'
-        echo "I said, Hello Mr. ${username}"
-        
         antHome = '/usr/local/lib/apache-ant-1.8.4'
-        echo ${antHome}
-        echo '${antHome}'
+
+        echo "${antHome}"
         //git url: 'https://github.com/camilomolina/jenkins-labs.git', branch: 'develop'
         checkout scm
 
     }
     stage('Build') {
         echo 'Building'
-        sh '${antHome}/bin/ant clean'
-        sh '${antHome}/bin/ant war'
+        sh "${antHome}/bin/ant clean"
+        sh "${antHome}/bin/ant war"
     }
     stage('Test') {
         echo 'Testing'
