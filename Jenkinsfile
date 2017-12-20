@@ -9,9 +9,11 @@ node {
 
         env.TOMCAT_HOME = '/usr/local/bin/apache-tomcat-9.0.0.M26'
 
-        withEnv(['JAVA_HOME=/usr/lib/jvm/jdk1.7.0_80', TOMCAT_HOME=/usr/local/bin/apache-tomcat-9.0.0.M26]) {
+        withEnv(['JAVA_HOME=/usr/lib/jvm/jdk1.7.0_80', 'TOMCAT_HOME=/usr/local/bin/apache-tomcat-9.0.0.M26']) {
             sh 'printenv'
         }
+
+
 
     }
     stage('Environment') {
@@ -22,6 +24,10 @@ node {
 
         echo "${antHome}"
         //git url: 'https://github.com/camilomolina/jenkins-labs.git', branch: 'develop'
+
+    env.JAVA_HOME = '/usr/lib/jvm/jdk1.6.0_45'
+
+  echo "jdk installation path is: ${jdk}"
 
         sh 'printenv'
         checkout scm
