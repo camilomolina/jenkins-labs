@@ -6,6 +6,7 @@ node {
     def antHome
     environment {
         JAVA_HOME = '/usr/lib/jvm/jdk1.7.0_80'
+        TOMCAT_HOME = '/usr/local/bin/apache-tomcat-9.0.0.M26'
     }
     stage('Environment') {
         echo 'Environment'
