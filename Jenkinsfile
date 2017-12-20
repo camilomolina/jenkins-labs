@@ -24,10 +24,10 @@ node {
 
         echo "${antHome}"
         //git url: 'https://github.com/camilomolina/jenkins-labs.git', branch: 'develop'
-
+  echo "jdk 1 installation path is: ${env.JAVA_HOME}"
     env.JAVA_HOME = '/usr/lib/jvm/jdk1.6.0_45'
 
-  echo "jdk installation path is: ${jdk}"
+  echo "jdk 2 installation path is: ${env.JAVA_HOME}"
 
         sh 'printenv'
         checkout scm
