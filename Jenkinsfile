@@ -11,7 +11,7 @@ node {
         echo 'Environment'
 
         //antHome = '/usr/local/lib/apache-ant-1.8.4'
-        antHome = '/usr/local/lib/apache-ant-1.10.0'
+        antHome = '/usr/local/lib/apache-ant-1.9.9'
 
         echo "${antHome}"
         //git url: 'https://github.com/camilomolina/jenkins-labs.git', branch: 'develop'
