@@ -5,18 +5,8 @@
 node {
     def antHome
     env.JAVA_HOME = '/usr/lib/jvm/jdk1.7.0_80'
+    env.TOMCAT_HOME = '/usr/local/bin/apache-tomcat-9.0.0.M26'
 
-            env.TOMCAT_HOME = '/usr/local/bin/apache-tomcat-9.0.0.M26'
-    environment {
-
-
-        withEnv(['JAVA_HOME=/usr/lib/jvm/jdk1.7.0_80', 'TOMCAT_HOME=/usr/local/bin/apache-tomcat-9.0.0.M26']) {
-            sh 'printenv'
-        }
-
-
-
-    }
     stage('Environment') {
         echo 'Environment'
 
@@ -25,10 +15,6 @@ node {
 
         echo "${antHome}"
         //git url: 'https://github.com/camilomolina/jenkins-labs.git', branch: 'develop'
-  echo "jdk 1 installation path is: ${env.JAVA_HOME}"
-    env.JAVA_HOME = '/usr/lib/jvm/jdk1.6.0_45'
-
-  echo "jdk 2 installation path is: ${env.JAVA_HOME}"
 
         sh 'printenv'
         checkout scm
