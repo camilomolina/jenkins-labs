@@ -31,8 +31,11 @@
         <pathelement location="lib/ext/mssqlserver.jar"/>
         <pathelement location="lib/ext/msutil.jar"/>
 
+        <!--
         <pathelement location="${env.JBOSS_HOME}/client/jbossall-client.jar"/>
-        <pathelement location="${env.JBOSS_HOME}/client/javax.servlet.jar"/>
+        <pathelement location="${env.JBOSS_HOME}/client/javax.servlet.jar"/> -->
+        <pathelement location="${env.TOMCAT_HOME}/lib/servlet-api.jar"/>
+        <pathelement location="${env.TOMCAT_HOME}/lib/jsp-api.jar"/>
     </path>
 
     <target name="init">
