@@ -24,6 +24,7 @@ node {
         echo 'Building'
         sh 'printenv'
         sh "${antHome}/bin/ant clean"
+        sh 'printenv'
         sh "${antHome}/bin/ant war"
     }
     stage('Test') {
