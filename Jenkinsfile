@@ -26,7 +26,7 @@ node {
     }
     stage('Test') {
         echo 'Testing'
-        sh "${antHome}/bin/sonar-scanner"
+        sh "${sonarHome}/bin/sonar-scanner"
     }
     stage('Deploy') {
         echo 'deployment'
