@@ -26,6 +26,7 @@ node {
     }
     stage('Test') {
         echo 'Testing'
+        env.JAVA_HOME = '/usr/lib/jvm/jdk1.8.0_121'
         sh "${sonarHome}/bin/sonar-scanner"
     }
     stage('Deploy') {
