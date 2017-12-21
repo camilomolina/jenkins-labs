@@ -31,7 +31,7 @@ node {
     }
     stage('Deploy') {
         echo 'deployment'
-        sh "sshpass -p '11042.' scp build/jenkins-labs.war it@10.96.0.202:/home/it"
+        sh 'sshpass -p 11042. scp build/jenkins-labs.war it@10.96.0.202:/home/it'
         sh 'sudo cp /home/it/jenkins-labs.war /usr/local/bin/apache-tomcat-9.0.0.M26/webapps'
         //scp /path/to/file username@a:/path/to/destination
         //sh 'ssh deploy@xxxxx.xxxxx.com running/xxxxxxx/dockerRun.sh'
