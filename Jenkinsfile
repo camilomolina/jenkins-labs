@@ -4,7 +4,7 @@ node {
     def antHome
     def sonarHome
 
-    env.JAVA_HOME = '/usr/lib/jvm/jdk1.7.0_80'
+    env.JAVA_HOME = '/usr/lib/jvm/jdk1.8.0_121'
     env.TOMCAT_HOME = '/usr/local/bin/apache-tomcat-9.0.0.M26'
 
     stage('Environment') {
