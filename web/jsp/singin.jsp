@@ -63,7 +63,7 @@
     <form action="/jenkins-labs/singin.do" method="post" id="singinForm" class="form-signin">
         <input type="hidden" id="method" name="method">
 
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Please sign in 2</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input name="user" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>

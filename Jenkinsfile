@@ -31,12 +31,13 @@ node {
     }
     stage('Deploy') {
         echo 'deployment'
+        sh "sudo sshpass -p 11042. ssh it@10.96.0.202 'sudo /etc/init.d/tomcat stop'"
+
         sh 'sudo sshpass -p 11042. scp build/jenkins-labs.war it@10.96.0.202:/home/it'
         sh "sudo sshpass -p 11042. ssh it@10.96.0.202 'sudo cp /home/it/jenkins-labs.war /usr/local/bin/apache-tomcat-9.0.0.M26/webapps'"
-        //sh 'sudo cp /home/it/jenkins-labs.war /usr/local/bin/apache-tomcat-9.0.0.M26/webapps'
-        //scp /path/to/file username@a:/path/to/destination
-        // sshpass -p "11042." ssh it@10.96.0.202 'ls'
-        //sh 'ssh deploy@xxxxx.xxxxx.com running/xxxxxxx/dockerRun.sh'
+        sh "sudo sshpass -p 11042. ssh it@10.96.0.202 'sudo chown -R tomcat:tomcat /usr/local/bin/apache-tomcat-9.0.0.M26'"
+
+        sh "sudo sshpass -p 11042. ssh it@10.96.0.202 'sudo /etc/init.d/tomcat start'"
     }
 }
 
