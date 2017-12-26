@@ -40,6 +40,22 @@ node {
         sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo chown -R tomcat:tomcat /usr/local/bin/apache-tomcat-9.0.0.M26'"
 
         sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo /etc/init.d/tomcat start'"
+
+
+    }
+    stage('Results') {
+        archive 'build/jenkins-labs.war'
+    }
+    stage('Send email') {
+        def mailRecipients = "camilo@bennu.cl"
+        def jobName = currentBuild.fullDisplayName
+
+        emailext body: '''${SCRIPT, template="groovy-html.template"}''',
+            mimeType: 'text/html',
+            subject: "[Jenkins] ${jobName}",
+            to: "${mailRecipients}",
+            replyTo: "${mailRecipients}",
+            recipientProviders: [[$class: 'CulpritsRecipientProvider']]
     }
 }
 
