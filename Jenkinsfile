@@ -7,6 +7,8 @@ node {
     def ssh = 'it@10.96.0.202'
     def sshPass = '11042.'
 
+    def app
+
     env.JAVA_HOME = '/usr/lib/jvm/jdk1.8.0_121'
     env.TOMCAT_HOME = '/usr/local/bin/apache-tomcat-9.0.0.M26'
 
@@ -15,6 +17,11 @@ node {
 
         antHome = '/usr/local/lib/apache-ant-1.9.9'
         sonarHome = '/usr/local/lib/sonar-scanner-2.8'
+
+        ssh = 'it@10.96.0.202'
+        sshPass = '11042.'
+
+        app = 'jenkins-labs.war'
 
         sh 'printenv'
 
@@ -35,14 +42,14 @@ node {
         echo 'deployment'
         sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo /etc/init.d/tomcat stop'"
 
-        sh "sudo sshpass -p ${sshPass} scp build/jenkins-labs.war ${ssh}:/home/it"
-        sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo cp /home/it/jenkins-labs.war /usr/local/bin/apache-tomcat-9.0.0.M26/webapps'"
+        sh "sudo sshpass -p ${sshPass} scp build/${app} ${ssh}:/home/it"
+        sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo cp /home/it/${app} /usr/local/bin/apache-tomcat-9.0.0.M26/webapps'"
         sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo chown -R tomcat:tomcat /usr/local/bin/apache-tomcat-9.0.0.M26'"
 
         sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo /etc/init.d/tomcat start'"
     }
     stage('Results') {
-        archive 'build/jenkins-labs.war'
+        archive "build/${app}"
 
         def mailRecipients = "camilo@bennu.cl"
         def jobName = currentBuild.fullDisplayName
