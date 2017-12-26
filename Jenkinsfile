@@ -35,7 +35,7 @@ node {
         echo 'deployment'
         sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo /etc/init.d/tomcat stop'"
 
-        sh 'sudo sshpass -p ${sshPass} scp build/jenkins-labs.war ${ssh}:/home/it'
+        sh "sudo sshpass -p ${sshPass} scp build/jenkins-labs.war ${ssh}:/home/it"
         sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo cp /home/it/jenkins-labs.war /usr/local/bin/apache-tomcat-9.0.0.M26/webapps'"
         sh "sudo sshpass -p ${sshPass} ssh ${ssh} 'sudo chown -R tomcat:tomcat /usr/local/bin/apache-tomcat-9.0.0.M26'"
 
