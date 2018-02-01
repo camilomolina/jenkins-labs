@@ -35,7 +35,7 @@ node {
     }
     stage('Deploy') {
         echo 'Deployment'
-        
+
         ansiblePlaybook(playbook: 'deploy.yml')
     }
     stage('Results') {
